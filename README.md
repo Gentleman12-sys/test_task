@@ -20,6 +20,12 @@
 
 ## Команды:
 
+Быстрый запуск:
+```bash
+docker compose build --no-cache
+docker compose up -d
+```
+
 Запуск базы данных:
 ```bash
 docker compose up -d --build postgres
@@ -81,6 +87,7 @@ LOG_LEVEL=info
 
 Примеры запросов: 
 ```bash
+ВЕЗДЕ localhost:3000
 GET /health → {"status":"ok","time":"2026-02-26T..."}
 GET /api/tariff/latest → {"date":"2026-02-26","count":82,"data":[{"nmid":0,"warehouse_name":"Коледино","coef":1.95,"amount":89.7,...}]}
 GET /api/tariff/2026-02-26 → {"date":"2026-02-26","count":82,"data":[...]}
