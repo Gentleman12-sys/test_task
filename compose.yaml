@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wb-tariff-app
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - WB_API_BASE=${WB_API_BASE}
+      - WB_API_KEY=${WB_API_KEY}
+      - GOOGLE_SERVICE_ACCOUNT=${GOOGLE_SERVICE_ACCOUNT:-}
+      - GOOGLE_SHEETS_CONFIG=${GOOGLE_SHEETS_CONFIG:-}
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - wb-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: wb-tariff-db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-wb_tariffs}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - wb-network
+
+volumes:
+  postgres_data:
+
+networks:
+  wb-network:
+    driver: bridge

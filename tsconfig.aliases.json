@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "#config/*": ["config/*"],
+      "#services/*": ["services/*"],
+      "#controllers/*": ["controllers/*"],
+      "#routes/*": ["routes/*"],
+      "#types/*": ["types/*"],
+      "#utils/*": ["utils/*"],
+      "#postgres/*": ["postgres/*"]
+    }
+  }
+}

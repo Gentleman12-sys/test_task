@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "allowImportingTsExtensions": false,
+    "baseUrl": "./src",
+    "paths": {
+      "#config/*": ["config/*.ts", "config/*.js"],
+      "#services/*": ["services/*.ts", "services/*.js"],
+      "#controllers/*": ["controllers/*.ts", "controllers/*.js"],
+      "#routes/*": ["routes/*.ts", "routes/*.js"],
+      "#types/*": ["types/*.ts", "types/*.js"],
+      "#utils/*": ["utils/*.ts", "utils/*.js"],
+      "#postgres/*": ["postgres/*.ts", "postgres/*.js"]
+    },
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
