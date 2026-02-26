@@ -51,7 +51,8 @@ docker compose down --rmi local --volumes
 docker compose up --build
 ```
 
-# === Server ===
+Настройки .env:
+```bash
 PORT=3000
 NODE_ENV=production
 
@@ -75,9 +76,11 @@ TARIFF_SYNC_CRON=0 * * * *
 SHEETS_SYNC_CRON=0 */6 * * *
 TIMEZONE=Europe/Moscow
 LOG_LEVEL=info
+```
 
 
 Примеры запросов: 
+```bash
 GET /health → {"status":"ok","time":"2026-02-26T..."}
 GET /api/tariff/latest → {"date":"2026-02-26","count":82,"data":[{"nmid":0,"warehouse_name":"Коледино","coef":1.95,"amount":89.7,...}]}
 GET /api/tariff/2026-02-26 → {"date":"2026-02-26","count":82,"data":[...]}
@@ -85,6 +88,7 @@ GET /api/tariff/range?startDate=2026-02-20&endDate=2026-02-26 → {"startDate":"
 GET /api/tariff/dates → {"dates":["2026-02-20","2026-02-26"],"count":2}
 POST /api/tariff/sync → {"status":"success","message":"Tariff sync started"}
 POST /api/sheets/export → {"status":"success","message":"Sheets export started"}
+```
 
 
 PS: С наилучшими пожеланиями!
